@@ -24,4 +24,19 @@ def web_query(query : str) -> str :
 
     return "\n----\n".join(out)
 
-print(web_query.invoke("What is the recent new of war"))
+
+@tool
+def scrape_url(url : str) -> str :
+    """Scrape and return clean text content from a given url for deeper reading"""
+    try :  
+        resp = requests.get(url, timeout=8, headers={"User-Agent" : "Mozilla/5.0"})
+        soup = BeautifulSoup(resp.text, "html.parser")
+        for tags in soup(["Script", "style", "nav", "footer"]): 
+            tags.decompose()
+
+        return soup.get_text(separator = " ", strip = True) [:3000]
+    except Exception as e :
+        return f"Could not scrape URL : {str(e)}"
+
+print(scrape_url.invoke("https://www.cnbc.com/2026/09/08/uk-israel-sanctions-miliband-florida-trump.html"))
+# print(web_query.invoke("What is the recent new of war"))
