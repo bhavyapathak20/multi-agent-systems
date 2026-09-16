@@ -38,5 +38,5 @@ def scrape_url(url : str) -> str :
     except Exception as e :
         return f"Could not scrape URL : {str(e)}"
 
-print(scrape_url.invoke("https://www.cnbc.com/2026/09/08/uk-israel-sanctions-miliband-florida-trump.html"))
+# print(scrape_url.invoke("https://www.cnbc.com/2026/09/08/uk-israel-sanctions-miliband-florida-trump.html"))
 # print(web_query.invoke("What is the recent new of war"))
